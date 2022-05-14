@@ -1,3 +1,4 @@
+
 var express = require('express');
 var app = express();
 
@@ -20,10 +21,11 @@ var app = express();
 
 // log in
 app.get('/login', function (req, res) {
-    const users_file = require("users")
+    const fs = require("fs")
+    const users_file = fs.readFileSync("users.json")
     var users = JSON.parse(users_file)
     // user exists and the password is correct
-    if (users.has(req.username) && req.password.localeCompare(users[req.username].password)) {
+    if (users[req.username] && req.password.localeCompare(users[req.username].password)) {
         res.send({token: req.username})
     } else {
         res.statusCode = 404
@@ -33,8 +35,9 @@ app.get('/login', function (req, res) {
 
 // sign up
 app.get('/signup', function (req, res) {
-    const users_file = require("users")
-    var users = new Map(JSON.parse(users_file))
+    const fs = require("fs")
+    const users_file = fs.readFileSync("users.json")
+    var users = JSON.parse(users_file)
     // user with this username already exists
     if (users.has(req.username)) {
         res.statusCode = 409
@@ -42,15 +45,15 @@ app.get('/signup', function (req, res) {
     } else {
         // add new user to users (Map)
         users.set(req.username, {"password": req.password, "name": req.name, "surname": req.surname, "date_of_birth": req.date_of_birth,
-         "phone_number": req.phone_number, "mail": req.mail, "coins_balance": req.coins_balance})
+        "phone_number": req.phone_number, "mail": req.mail, "coins_balance": req.coins_balance})
         // convert to json and write to users.json
-        users_file.writeFile('users.json', JSON.stringify(users));
+        users_file.writeFileSync('users.json', JSON.stringify(users));
         // save and send verification code 
-        const verifications_file = require("verifications")
-        var verifications = new Map(JSON.parse(users_file))
+        const verifications_file = fs.readFileSync("verifications.json")
+        var verifications = JSON.parse(verifications_file)
         var verification_code = Math.random() * (10000 - 1000) + 1000
         verifications.set(req.username, verification_code)
-        users_file.writeFile('verifications.json', JSON.stringify(verifications));
+        users_file.writeFileSync('verifications.json', JSON.stringify(verifications));
         res.send({verification_code: verification_code})
     }
 });
@@ -70,21 +73,21 @@ app.get('/verification', function (req, res) {
 
 // listing
 
-app.get('/listing/list', function (req, res) {
-    username = users[req.token].username
-    if (!username) {
-        req.statusCode = 404
-        req.send({error: "404"})
-        return
-    }
+// app.get('/listing/list', function (req, res) {
+//     username = users[req.token].username
+//     if (!username) {
+//         req.statusCode = 404
+//         req.send({error: "404"})
+//         return
+//     }
 
-    res.send('POST Request');
-});
+//     res.send('POST Request');
+// });
 
-app.put('/listing', function (req, res) {
-    // update
-    res.send('PUT Request');
-});
+// app.put('/listing', function (req, res) {
+//     // update
+//     res.send('PUT Request');
+// });
 
 // request 
 
