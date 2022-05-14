@@ -1,13 +1,53 @@
 body {
   margin: 0;
+  background-color: rgb(40, 41, 46);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Ubuntu',
+  sans-serif;
 }
 
+body,
+h1,
+h2,
+h3,
+h4,
+label,
+.ant-form-item-label>label,
+.ant-checkbox+span {
+  color: rgb(255, 255, 255);
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#app-content {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.link {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+.home-button {
+  color: rgb(255, 255, 255);
+
+  display: flex;
+  justify-content: flex-start;
+  flex-grow: 0;
+  font-size: 40px;
+  text-decoration: none;
+}
+
+.home-button:hover {
+  color: rgb(140, 182, 255);
+
+  transition: 0.2s;
+  transform: scale(1.1);
 }
