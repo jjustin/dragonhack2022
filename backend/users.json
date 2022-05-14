@@ -1,0 +1,11 @@
+{
+    "username": {
+        "password": "",
+        "name": "",
+        "surname": "",
+        "date_of_birth": 0,
+        "phone_number": "",
+        "mail": "",
+        "coins_balance": 0
+    }
+}
