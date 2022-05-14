@@ -1,17 +1,27 @@
 {
     "username0": {
+<<<<<<< HEAD
         "password": "a",
+=======
+        "password": "password",
+>>>>>>> 75e4dc21d163117b9a6e5f7c069678993db24e00
         "name": "A",
         "surname": "",
         "date_of_birth": 0,
         "phone_number": "",
         "mail": "",
+<<<<<<< HEAD
         "coins_balance": 10,
         "listing": [
             {
                 "cena": 5
             }
         ]
+=======
+        "coins_balance": 0,
+        "listing": [{"username" : "username0", "imeListinga" : "hlace", "cena" : 15, "opis" : "dobre", "url" : "/images?name=sp-pgm-dc-11.jpg"}, {"username" : "username0", "imeListinga" : "majica", "cena" : 7, "opis" : "v redu", "url" : "/images?name=men-s-travel-trekking-shirt-travel100-warm-bordeaux.jpg"}]
+        
+>>>>>>> 75e4dc21d163117b9a6e5f7c069678993db24e00
     },
     "username1": {
         "password": "b",
@@ -20,7 +30,13 @@
         "date_of_birth": 0,
         "phone_number": "",
         "mail": "",
+<<<<<<< HEAD
         "coins_balance": 10
+=======
+        "coins_balance": 1,
+        "listing": [{"username" : "username1", "imeListinga" : "gate", "cena" : 2, "opis" : "raztrgane", "url" : "/images?name=360_F_301217319_CyOQc22Km91LhZD4cyOGefC7eqCFD1QG.jpg"}]
+
+>>>>>>> 75e4dc21d163117b9a6e5f7c069678993db24e00
     },
     "username2": {
         "password": "c",
@@ -29,7 +45,12 @@
         "date_of_birth": 0,
         "phone_number": "",
         "mail": "",
+<<<<<<< HEAD
         "coins_balance": 2
+=======
+        "coins_balance": 2,
+        "listing" : []
+>>>>>>> 75e4dc21d163117b9a6e5f7c069678993db24e00
     },
     "username3": {
         "password": "d",
@@ -38,7 +59,12 @@
         "date_of_birth": 0,
         "phone_number": "",
         "mail": "",
+<<<<<<< HEAD
         "coins_balance": 3
+=======
+        "coins_balance": 3,
+        "listing" : []
+>>>>>>> 75e4dc21d163117b9a6e5f7c069678993db24e00
     },
     "username4": {
         "password": "e",
@@ -47,6 +73,11 @@
         "date_of_birth": 0,
         "phone_number": "",
         "mail": "",
+<<<<<<< HEAD
         "coins_balance": 4
+=======
+        "coins_balance": 4,
+        "listing" : []
+>>>>>>> 75e4dc21d163117b9a6e5f7c069678993db24e00
     }
 }

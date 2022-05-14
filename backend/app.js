@@ -1,8 +1,11 @@
 
 var express = require('express');
 var app = express();
+var cors = require('cors')
 
+app.use(cors())
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 
 // users = {
 //     "username": {
@@ -21,7 +24,8 @@ app.use(express.json());
 // }
 
 // log in
-app.get('/login', function (req, res) {
+app.post('/login', function (req, res) {
+    console.log(req.body)
     const fs = require("fs")
     const users_file = fs.readFileSync("users.json")
     var users = JSON.parse(users_file)
@@ -35,7 +39,7 @@ app.get('/login', function (req, res) {
 });
 
 // sign up
-app.get('/signup', function (req, res) {
+app.post('/signup', function (req, res) {
     const fs = require("fs")
     const users_file = fs.readFileSync("users.json")
     var users = JSON.parse(users_file)
@@ -46,7 +50,7 @@ app.get('/signup', function (req, res) {
     } else {
         users = new Map(Object.entries(users))
         users.set(req.body.username, {"password": req.body.password, "name": req.body.name, "surname": req.body.surname, "date_of_birth": req.body.date_of_birth,
-        "phone_number": req.body.phone_number, "location":"", "picture_path":"" ,"mail": req.body.mail, "coins_balance": req.body.coins_balance, "listing": []})
+        "phone_number": req.body.phone_number, "location":"","mail": req.body.mail, "coins_balance": req.body.coins_balance, "listing": []})
         
         fs.writeFileSync('users.json', JSON.stringify(users));
         const verifications_file = fs.readFileSync("verifications.json")
@@ -62,7 +66,7 @@ app.get('/signup', function (req, res) {
 });
 
 // user verification
-app.get('/verification', function (req, res) {
+app.post('/verification', function (req, res) {
     const fs = require("fs")
     const verifications_file = fs.readFileSync("verifications.json")
     var verifications = JSON.parse(verifications_file)
@@ -79,23 +83,54 @@ app.get('/verification', function (req, res) {
     }
 });
 
+
+//user ima array objectov po imenu listing
+// object listing ima propertije username user-ja, index, ime listinga, ceno, url -  ce klikne nanj v drugem gettu dobi se sliko
+// nadgradnja: pošljem mu jih recimo le prvih 30
+
+// poslje array z objekti zgoraj opisane oblike
+
+
 // listing
 app.get('/listing', function (req, res) {
+    const fs = require("fs")
+    const users_file = fs.readFileSync("users.json")
+    const users = JSON.parse(users_file)
+    const allListings = [];
     
-
+    for (let i in users) {
+        for(let j in users[i].listing) {
+            allListings.push(users[i].listing[j])
+        }
+    }
+    
+    res.send(allListings)
 });
+
+app.get('/images', function (req, res) {
+    
+    const name = req.query.name
+    console.log(name)
+    const path = require('path');
+    let link = path.resolve('images', name);
+    //console.log(link);
+
+    res.sendFile(link);
+});
+
+
+//listingPicture
+// poda mi username in index,
+    
 
 // // request
 // app.get('/request', function (req, res) { 
-
-
 // });
 
 // // accept request
 // app.get('/accept', function (req, res) { 
-
-
 // });
+
 
 // seller comfirmation
 app.get('/seller', function (req, res) {  // body: seller username, buyer username, item index
@@ -162,7 +197,6 @@ app.get('/buyer', function (req, res) {
     fs.writeFileSync('comfirmations.json', JSON.stringify(comfirmations));
     res.send({"status": "ok"})
 });
-
 
 var server = app.listen(5000, function () {
     console.log('Node server is running..');
