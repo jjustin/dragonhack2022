@@ -17,7 +17,7 @@ app.use(express.json());
 // }
 
 // verifications = {
-//     "username": verification_code 
+//     "username":{ verification_code: 5555} 
 // }
 
 // log in
@@ -25,9 +25,7 @@ app.get('/login', function (req, res) {
     const fs = require("fs")
     const users_file = fs.readFileSync("users.json")
     var users = JSON.parse(users_file)
-    console.log(req.body)
-    // user exists and the password is correct
-    console.log()
+
     if (users[req.body.username] && req.body.password == users[req.body.username].password) {
         res.send({token: req.body.username})
     } else {
@@ -41,31 +39,34 @@ app.get('/signup', function (req, res) {
     const fs = require("fs")
     const users_file = fs.readFileSync("users.json")
     var users = JSON.parse(users_file)
-    // user with this username already exists
-    if (users.has(req.body.username)) {
+
+    if (users[req.body.username]) {
         res.statusCode = 409
         res.send({error: "409"})
     } else {
-        // add new user to users (Map)
+        users = new Map(Object.entries(users))
         users.set(req.body.username, {"password": req.body.password, "name": req.body.name, "surname": req.body.surname, "date_of_birth": req.body.date_of_birth,
         "phone_number": req.body.phone_number, "mail": req.body.mail, "coins_balance": req.body.coins_balance})
-        // convert to json and write to users.json
-        users_file.writeFileSync('users.json', JSON.stringify(users));
-        // save and send verification code 
+        
+        fs.writeFileSync('users.json', JSON.stringify(users));
         const verifications_file = fs.readFileSync("verifications.json")
         var verifications = JSON.parse(verifications_file)
-        var verification_code = Math.random() * (10000 - 1000) + 1000
+        verifications = new Map(Object.entries(verifications))
+
+        var verification_code = Math.floor(Math.random() * (10000 - 1000) + 1000)        
         verifications.set(req.body.username, verification_code)
-        users_file.writeFileSync('verifications.json', JSON.stringify(verifications));
-        res.send({verification_code: verification_code})
+        //!!!!!! sent code on sms
+        fs.writeFileSync('verifications.json', JSON.stringify(verifications));
+        res.send({"status": "verification sent"})
     }
 });
 
 // user verification
 app.get('/verification', function (req, res) {
-    const verifications_file = require("verifications")
-    var verifications = new Map(JSON.parse(users_file))
-    if (verifications[req.body.username].verification_code == req.body.verification_code) {
+    const fs = require("fs")
+    const verification_file = fs.readFileSync("verifications.json")
+    var verifications = JSON.parse(verification_file)
+    if (verifications[req.body.username] == req.body.verification_code) {
         res.statusCode = 207
         res.send({"status": "ok"})
     } else {
