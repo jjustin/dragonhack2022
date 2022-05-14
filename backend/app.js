@@ -1,8 +1,11 @@
 
 var express = require('express');
 var app = express();
+var cors = require('cors')
 
+app.use(cors())
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 
 // users = {
 //     "username": {
@@ -21,7 +24,8 @@ app.use(express.json());
 // }
 
 // log in
-app.get('/login', function (req, res) {
+app.post('/login', function (req, res) {
+    console.log(req.body)
     const fs = require("fs")
     const users_file = fs.readFileSync("users.json")
     var users = JSON.parse(users_file)
@@ -35,7 +39,7 @@ app.get('/login', function (req, res) {
 });
 
 // sign up
-app.get('/signup', function (req, res) {
+app.post('/signup', function (req, res) {
     const fs = require("fs")
     const users_file = fs.readFileSync("users.json")
     var users = JSON.parse(users_file)
@@ -62,7 +66,7 @@ app.get('/signup', function (req, res) {
 });
 
 // user verification
-app.get('/verification', function (req, res) {
+app.post('/verification', function (req, res) {
     const fs = require("fs")
     const verification_file = fs.readFileSync("verifications.json")
     var verifications = JSON.parse(verification_file)
