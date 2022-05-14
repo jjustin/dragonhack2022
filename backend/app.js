@@ -75,7 +75,40 @@ app.get('/verification', function (req, res) {
     }
 });
 
+
+
+
+
+
+
+
+//user ima array objectov po imenu listing
+// object listing ima propertije username user-ja, index, ime listinga, ceno,  -  ce klikne nanj v drugem gettu dobi se sliko
+// nadgradnja: pošljem mu jih recimo le prvih 30
+
+// poslje array z objekti zgoraj opisane oblike
+
+
 // listing
+app.get('/listing', function (req, res) {
+    const fs = require("fs")
+    const users_file = fs.readFileSync("users.json")
+    const users = JSON.parse(users_file)
+    console.log(users)
+    const allListings = [];
+    
+    for (let i in users) {
+        console.log(i)
+        for(let j in users[i].listing) {
+            console.log(users[i].listing)
+            console.log(j)
+            allListings.push(users[i].listing[j])
+        }
+    }
+    
+    res.send(allListings)
+    
+});
 
 // app.get('/listing/list', function (req, res) {
 //     username = users[req.token].username
