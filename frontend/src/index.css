@@ -16,6 +16,7 @@ h2,
 h3,
 h4,
 label,
+p,
 .ant-form-item-label>label,
 .ant-checkbox+span {
   color: rgb(255, 255, 255);
