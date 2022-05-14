@@ -83,7 +83,7 @@ app.get('/verification', function (req, res) {
 
 
 //user ima array objectov po imenu listing
-// object listing ima propertije username user-ja, index, ime listinga, ceno,  -  ce klikne nanj v drugem gettu dobi se sliko
+// object listing ima propertije username user-ja, index, ime listinga, ceno, url -  ce klikne nanj v drugem gettu dobi se sliko
 // nadgradnja: pošljem mu jih recimo le prvih 30
 
 // poslje array z objekti zgoraj opisane oblike
@@ -94,14 +94,10 @@ app.get('/listing', function (req, res) {
     const fs = require("fs")
     const users_file = fs.readFileSync("users.json")
     const users = JSON.parse(users_file)
-    console.log(users)
     const allListings = [];
     
     for (let i in users) {
-        console.log(i)
         for(let j in users[i].listing) {
-            console.log(users[i].listing)
-            console.log(j)
             allListings.push(users[i].listing[j])
         }
     }
@@ -110,23 +106,24 @@ app.get('/listing', function (req, res) {
     
 });
 
-// app.get('/listing/list', function (req, res) {
-//     username = users[req.token].username
-//     if (!username) {
-//         req.statusCode = 404
-//         req.send({error: "404"})
-//         return
-//     }
+app.get('/images', function (req, res) {
+    
+    const name = req.query.name
+    console.log(name)
+    const path = require('path');
+    let link = path.resolve('images', name);
+    //console.log(link);
 
-//     res.send('POST Request');
-// });
+    res.sendFile(link);
+    
+    
+});
 
-// app.put('/listing', function (req, res) {
-//     // update
-//     res.send('PUT Request');
-// });
 
-// request 
+
+//listingPicture
+// poda mi username in index, 
+
 
 
 var server = app.listen(5000, function () {

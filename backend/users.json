@@ -7,7 +7,7 @@
         "phone_number": "",
         "mail": "",
         "coins_balance": 0,
-        "listing": [{"username" : "username0", "imeListinga" : "hlace", "cena" : 15, "opis" : "dobre"}, {"username" : "username0", "imeListinga" : "majica", "cena" : 7, "opis" : "v redu"}]
+        "listing": [{"username" : "username0", "imeListinga" : "hlace", "cena" : 15, "opis" : "dobre", "url" : "/images?name=sp-pgm-dc-11.jpg"}, {"username" : "username0", "imeListinga" : "majica", "cena" : 7, "opis" : "v redu", "url" : "/images?name=men-s-travel-trekking-shirt-travel100-warm-bordeaux.jpg"}]
         
     },
     "username1": {
@@ -18,7 +18,7 @@
         "phone_number": "",
         "mail": "",
         "coins_balance": 1,
-        "listing": [{"username" : "username1", "imeListinga" : "gate", "cena" : 2, "opis" : "raztrgane"}]
+        "listing": [{"username" : "username1", "imeListinga" : "gate", "cena" : 2, "opis" : "raztrgane", "url" : "/images?name=360_F_301217319_CyOQc22Km91LhZD4cyOGefC7eqCFD1QG.jpg"}]
 
     },
     "username2": {
