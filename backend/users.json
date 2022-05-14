@@ -1,1 +1,52 @@
-{}
+{
+    "username0": {
+        "password": "a",
+        "name": "A",
+        "surname": "",
+        "date_of_birth": 0,
+        "phone_number": "",
+        "mail": "",
+        "coins_balance": 10,
+        "listing": [
+            {
+                "cena": 5
+            }
+        ]
+    },
+    "username1": {
+        "password": "b",
+        "name": "B",
+        "surname": "",
+        "date_of_birth": 0,
+        "phone_number": "",
+        "mail": "",
+        "coins_balance": 10
+    },
+    "username2": {
+        "password": "c",
+        "name": "C",
+        "surname": "",
+        "date_of_birth": 0,
+        "phone_number": "",
+        "mail": "",
+        "coins_balance": 2
+    },
+    "username3": {
+        "password": "d",
+        "name": "D",
+        "surname": "",
+        "date_of_birth": 0,
+        "phone_number": "",
+        "mail": "",
+        "coins_balance": 3
+    },
+    "username4": {
+        "password": "e",
+        "name": "E",
+        "surname": "",
+        "date_of_birth": 0,
+        "phone_number": "",
+        "mail": "",
+        "coins_balance": 4
+    }
+}

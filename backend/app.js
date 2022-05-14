@@ -46,7 +46,7 @@ app.get('/signup', function (req, res) {
     } else {
         users = new Map(Object.entries(users))
         users.set(req.body.username, {"password": req.body.password, "name": req.body.name, "surname": req.body.surname, "date_of_birth": req.body.date_of_birth,
-        "phone_number": req.body.phone_number, "mail": req.body.mail, "coins_balance": req.body.coins_balance})
+        "phone_number": req.body.phone_number, "location":"", "picture_path":"" ,"mail": req.body.mail, "coins_balance": req.body.coins_balance, "listing": []})
         
         fs.writeFileSync('users.json', JSON.stringify(users));
         const verifications_file = fs.readFileSync("verifications.json")
@@ -64,10 +64,14 @@ app.get('/signup', function (req, res) {
 // user verification
 app.get('/verification', function (req, res) {
     const fs = require("fs")
-    const verification_file = fs.readFileSync("verifications.json")
-    var verifications = JSON.parse(verification_file)
+    const verifications_file = fs.readFileSync("verifications.json")
+    var verifications = JSON.parse(verifications_file)
     if (verifications[req.body.username] == req.body.verification_code) {
         res.statusCode = 207
+        let usr = req.body.username
+        verifications = new Map(Object.entries(verifications))
+        verifications.delete(usr)
+        fs.writeFileSync('verifications.json', JSON.stringify(verifications));
         res.send({"status": "ok"})
     } else {
         res.statusCode = 404
@@ -76,24 +80,88 @@ app.get('/verification', function (req, res) {
 });
 
 // listing
+app.get('/listing', function (req, res) {
+    
 
-// app.get('/listing/list', function (req, res) {
-//     username = users[req.token].username
-//     if (!username) {
-//         req.statusCode = 404
-//         req.send({error: "404"})
-//         return
-//     }
+});
 
-//     res.send('POST Request');
+// // request
+// app.get('/request', function (req, res) { 
+
+
 // });
 
-// app.put('/listing', function (req, res) {
-//     // update
-//     res.send('PUT Request');
+// // accept request
+// app.get('/accept', function (req, res) { 
+
+
 // });
 
-// request 
+// seller comfirmation
+app.get('/seller', function (req, res) {  // body: seller username, buyer username, item index
+    const fs = require("fs")
+
+    const comfirmations_file = fs.readFileSync("comfirmations.json")
+    var comfirmations = JSON.parse(comfirmations_file)
+    for (let i = 0; i < comfirmations.length; i++) {
+        if (comfirmations[i].seller == req.body.seller && comfirmations[i].buyer == req.body.buyer 
+            && comfirmations[i].index == req.body.index) {
+            comfirmations[i].seller_comf = true
+            if (comfirmations[i].buyer_comf == true) {
+                
+                const users_file = fs.readFileSync("users.json")
+                var users = JSON.parse(users_file)
+                let price = users[req.body.seller].listing[req.body.index].cena
+                if (users[req.body.buyer].coins_balance >= price) {
+                    users[req.body.buyer].coins_balance -= price
+                    users[req.body.seller].coins_balance += price
+                    fs.writeFileSync('users.json', JSON.stringify(users));
+                    comfirmations.splice(i,1)
+                } else {
+                    res.statusCode = 404
+                    res.send({error: "404"})
+                }
+            }
+            break
+        }
+    }
+    
+    fs.writeFileSync('comfirmations.json', JSON.stringify(comfirmations));
+    res.send({"status": "ok"})
+
+});
+
+// buyer comfirmation
+app.get('/buyer', function (req, res) { 
+    const fs = require("fs")
+
+    const comfirmations_file = fs.readFileSync("comfirmations.json")
+    var comfirmations = JSON.parse(comfirmations_file)
+    for (let i = 0; i < comfirmations.length; i++) {
+        if (comfirmations[i].seller == req.body.seller && comfirmations[i].buyer == req.body.buyer 
+            && comfirmations[i].index == req.body.index) {
+            comfirmations[i].buyer_comf = true
+            if (comfirmations[i].seller_comf == true) {
+                const users_file = fs.readFileSync("users.json")
+                var users = JSON.parse(users_file)
+                let price = users[req.body.seller].listing[req.body.index].cena
+                if (users[req.body.buyer].coins_balance >= price) {
+                    users[req.body.buyer].coins_balance -= price
+                    users[req.body.seller].coins_balance += price
+                    fs.writeFileSync('users.json', JSON.stringify(users));
+                    comfirmations.splice(i,1)
+                } else {
+                    res.statusCode = 404
+                    res.send({error: "404"})
+                }
+            }
+            break
+        }
+    }
+    
+    fs.writeFileSync('comfirmations.json', JSON.stringify(comfirmations));
+    res.send({"status": "ok"})
+});
 
 
 var server = app.listen(5000, function () {
