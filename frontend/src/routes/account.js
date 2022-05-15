@@ -6,20 +6,30 @@ import { Link } from 'react-router-dom';
 import ListingShort from '../components/listingShort';
 import { List, Avatar } from 'antd';
 
-const podatki = [
+const data = [
     {
-        title: 'Ant Design Title 1',
+        title: 'First item sold',
     },
     {
-        title: 'Ant Design Title 2',
+        title: 'Tenth item sold',
     },
     {
-        title: 'Ant Design Title 3',
+        title: '100 swapcoins rotated',
     },
     {
-        title: 'Ant Design Title 4',
+        title: '250 swapcoins rotated',
     },
+    {
+        title: 'Fist item bought',
+    },
+    {
+        title: 'Tenth item bought',
+    },
+    {
+        title: 'Traded with 10 different users',
+    }
 ];
+
 
 
 export default function Account() {
@@ -47,69 +57,60 @@ export default function Account() {
     if (loading) {
         return null
     }
-    let listings = Object.values(user.listings);
+    let listings = Object.values(user.listings ? user.listings : []);
     console.log(listings);
 
     return (
         <main>
             <div>
-                <h2 style={{ padding: "15px" }}>Account info: </h2>
+                <h2 style={{ paddingLeft: "15px", paddingTop: "40px" }}>Account info: </h2>
             </div>
             <div style={{ marginLeft: "20px" }}>
                 <Row style={{
-                    padding: "20px"
+                    paddingLeft: "20px",
+                    paddingRight: "20px"
                 }}>
-                    <Col sm={2.5}>
-                        <div>Username:</div>
-                        <div>Phone Number:</div>
-                        <div>Current Balance:</div>
-                        <div>Achievements:</div>
-                    </Col>
-                    <Col sm={7}>
-                        <div>{localStorage.getItem("token")}</div>
-                        <div>{user.phone_number}</div>
-                        <div>{user.coins_balance} {mnozina}</div>
-
-                        <div>
+                    <Col sm={10}>
+                        <div style={{ fontSize: "17px" }} >Username: <b style={{ fontSize: "21px" }}>{localStorage.getItem("token")}</b></div>
+                        <div style={{ fontSize: "17px" }}>Phone Number: <b style={{ fontSize: "21px" }}>{"0" + user.phone_number.slice(5)}</b></div>
+                        <div style={{ fontSize: "17px" }}>Current Balance: <b style={{ fontSize: "21px" }}>{user.coins_balance} {mnozina}</b></div>
+                        <div style={{ paddingTop: "30px" }}>
                             <List
                                 itemLayout="horizontal"
-                                dataSource={podatki}
+                                dataSource={data}
                                 renderItem={item => (
                                     <List.Item>
                                         <List.Item.Meta
-                                            avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                                            title={<a href="https://ant.design">{item.title}</a>}
-                                            description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                                            avatar={<Avatar src="https://www.seekpng.com/png/detail/431-4310855_achievement-icon-icon.png" />}
+                                            title={<h3>{item.title}</h3>}
+                                            description="<Achivement details></Achivement details>"
                                         />
                                     </List.Item>
                                 )}
                             />
                         </div>
                     </Col>
-                </Row>
-                <Row style={{ marginTop: "20px" }}>
+                </Row >
 
-                    <Col sm={0.5}>
-                        <div>Listings:</div>
-                    </Col>
+                <h1 style={{ paddingTop: "30px" }}>Your Listings</h1>
                     <Col>
                         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-evenly" }}>
                             {
                                 listings.map(listing => (
                                     <Link to={"/listings/" + listing.id} key={listing.id}>
                                         <ListingShort
-                                            name={listing.imeListinga}
-                                            img={"http://localhost:5000/images?name=" + listing.url}
-                                            cost={listing.cena}
+                                            name={listing.title}
+                                            img={listing?.images?.length ? listing.images[0] : undefined}
+                                            cost={listing.price}
                                             id={listing.id}
+                                            type={listing.type}
                                             style={{ margin: "10px" }}
                                         ></ListingShort>
                                     </Link>
                                 ))
                             }
                         </div >
-                    </Col>
-                </Row>
+                </Col>
             </div>
         </main >
 
@@ -118,33 +119,3 @@ export default function Account() {
 
 
 
-
-const data = [
-    {
-        title: 'Ant Design Title 1',
-    },
-    {
-        title: 'Ant Design Title 2',
-    },
-    {
-        title: 'Ant Design Title 3',
-    },
-    {
-        title: 'Ant Design Title 4',
-    },
-];
-
-
-<List
-    itemLayout="horizontal"
-    dataSource={data}
-    renderItem={item => (
-        <List.Item>
-            <List.Item.Meta
-                avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                title={<a href="https://ant.design">{item.title}</a>}
-                description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-            />
-        </List.Item>
-    )}
-/>

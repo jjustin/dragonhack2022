@@ -19,9 +19,14 @@ label,
 p,
 div,
 span,
+.ant-list-item-meta-title>a,
 .ant-form-item-label>label,
-.ant-checkbox>span {
+.ant-checkbox>span,
+.ant-list-item-meta-description {
   color: rgb(255, 255, 255);
+}
+.ant-list-item-meta-description {
+  color: rgb(200, 200, 200);
 }
 .ant-radio-button-wrapper>span,
 .ant-select-arrow,
