@@ -33,9 +33,10 @@ export default function Listing() {
                 <Row>
                     <Col sm={2.5}>
                         <button id='knof' className="home-button link" style={{
-                            backgroundColor: "transparent", border: "none", fontSize: "30px",
-                            marginTop: "40px"
-                        }} >
+                            backgroundColor: "rgb(0, 21, 41)", border: "none", fontSize: "30px",
+                            marginTop: "40px", paddingBottom: "7px", paddingTop: "7px", paddingLeft: "15px",
+                            paddingRight: "15px", borderRadius: "12px"
+                        }}>
                             I'm interested!
                         </button>
                     </Col>

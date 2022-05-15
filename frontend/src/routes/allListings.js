@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import ListingShort from '../components/listingShort';
 import { useEffect, useState } from 'react';
 import { getApi } from '../utils/api'
+import { useImage } from 'react-image'
+
 
 export default function AllListings() {
     let [listings, setListings] = useState([]);
@@ -23,15 +25,15 @@ export default function AllListings() {
                 listings.map(listing => (
                     <Link to={"/listings/" + listing.id} key={listing.id}>
                         <ListingShort
-                            name={listing.name}
-                            img={listing.img}
-                            cost={listing.cost}
+                            name={listing.imeListinga}
+                            img={"http://localhost:5000/images?name=" + listing.url}
+                            cost={listing.cena}
                             id={listing.id}
                             style={{ margin: "10px" }}
                         ></ListingShort>
                     </Link>
                 ))
             }
-        </div>
+        </div >
     );
 };
