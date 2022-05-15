@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import ListingShort from '../components/listingShort';
 import { useEffect, useState } from 'react';
 import { getApi } from '../utils/api'
-import { useImage } from 'react-image'
 
 
 export default function AllListings() {
