@@ -1,21 +1,31 @@
-APP_URL = "localhost:5000"
+const APP_URL = "localhost:5000"
 
 function callApi(endpoint, method, body) {
-    return fetch("http://" + APP_URL + "/api/v1/" + endpoint, { method: method, body: body })
+    console.log(endpoint, method, body)
+    return fetch(
+        "http://" + APP_URL + "" + endpoint,
+        {
+            method,
+            body: JSON.stringify(body),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("token")
+            },
+        })
 }
 
-function postApi(endpoint, body) {
+export function postApi(endpoint, body) {
     return callApi(endpoint, "POST", body);
 }
 
-function getApi(endpoint) {
+export function getApi(endpoint) {
     return callApi(endpoint, "GET");
 }
 
-function putApi(endpoint, body) {
+export function putApi(endpoint, body) {
     return callApi(endpoint, "PUT", body);
 }
 
-function deleteApi(endpoint) {
+export function deleteApi(endpoint) {
     return callApi(endpoint, "DELETE");
 }

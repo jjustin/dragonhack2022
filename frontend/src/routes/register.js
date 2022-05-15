@@ -5,6 +5,7 @@ import {
     Select,
     Button
 } from 'antd';
+import { postApi } from "../utils/api"
 
 const { Option } = Select;
 
@@ -19,7 +20,26 @@ const RegistrationForm = () => {
 
     const onFinish = (values) => {
         values.geo = { lat, long }
-        console.log('Received values of form: ', values);
+        values.phone_number = "00" + values.prefix + values.phone;
+        values.coins_balance = 3
+        postApi("/register", values).
+            then(res => {
+                if (res.status == 409) {
+                    form.setFields([
+                        {
+                            name: 'username',
+                            errors: ['Username already exists'],
+                        },
+                    ])
+                    return
+                }
+                return res.json()
+            }).
+            then(res => {
+                if (res.status == "verification sent") {
+                    window.location.href = "/register2?code=" + res.code + "&username=" + res.username;
+                }
+            })
     };
 
 
@@ -75,6 +95,10 @@ const RegistrationForm = () => {
                             required: true,
                             message: 'Please input your password!',
                         },
+                        {
+                            min: 8,
+                            message: 'Password must be at least 8 characters',
+                        }
                     ]}
                     hasFeedback
                 >

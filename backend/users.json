@@ -1,4 +1,27 @@
 {
+    "11": {
+        "password": "password",
+        "phone_number": "0038641215620",
+        "geo": {
+            "lat": 46.050013958457136,
+            "long": 14.46908895235045
+        },
+        "coins_balance": 3,
+        "verification_code": 1891,
+        "public_code": 6306,
+        "verified": true
+    },
+    "1234": {
+        "password": "password",
+        "phone_number": "0038641215620",
+        "geo": {
+            "lat": 46.05001785020847,
+            "long": 14.469087922253854
+        },
+        "coins_balance": 3,
+        "verification_code": 9420,
+        "public_code": 1029
+    },
     "username0": {
         "password": "password",
         "name": "A",
@@ -13,14 +36,14 @@
                 "imeListinga": "hlace",
                 "cena": 15,
                 "opis": "dobre",
-                "url": "/images?name=sp-pgm-dc-11.jpg"
+                "url": "sp-pgm-dc-11.jpg"
             },
             {
                 "username": "username0",
                 "imeListinga": "majica",
                 "cena": 7,
                 "opis": "v redu",
-                "url": "/images/men-s-travel-trekking-shirt-travel100-warm-bordeaux.jpg"
+                "url": "men-s-travel-trekking-shirt-travel100-warm-bordeaux.jpg"
             }
         ]
     },
@@ -38,8 +61,7 @@
                 "imeListinga": "gate",
                 "cena": 2,
                 "opis": "raztrgane",
-                "url": "/images/360_F_301217319_CyOQc22Km91LhZD4cyOGefC7eqCFD1QG.jpg",
-                "imageName": "360_F_301217319_CyOQc22Km91LhZD4cyOGefC7eqCFD1QG.jpg"
+                "url": "360_F_301217319_CyOQc22Km91LhZD4cyOGefC7eqCFD1QG.jpg"
             }
         ]
     },
@@ -78,5 +100,14 @@
         "mail": "",
         "coins_balance": 4,
         "listing": []
+    },
+    "username5": {
+        "password": "password",
+        "phone_number": "0038641215620",
+        "geo": {
+            "lat": 46.0500201519509,
+            "long": 14.469088583786757
+        },
+        "coins_balance": 3
     }
 }
