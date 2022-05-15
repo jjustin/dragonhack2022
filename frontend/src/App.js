@@ -13,6 +13,7 @@ import Register2 from "./routes/register2";
 import Header from './components/header';
 import { Content } from "antd/lib/layout/layout";
 import List from "./routes/list";
+import Account from "./routes/account";
 
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/list" element={<List />} />
           <Route path="/register2" element={<Register2 />} />
+          <Route path="/account" element={<Account />} />
         </Routes>
       </Content>
     </div>
