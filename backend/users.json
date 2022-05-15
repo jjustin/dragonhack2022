@@ -1,1 +1,248 @@
-{"username0":{"password":"password","name":"A","surname":"","date_of_birth":0,"phone_number":"","mail":"","coins_balance":15,"listing":[{"username":"username0","imeListinga":"hlace","cena":15,"opis":"dobre","url":"/images?name=sp-pgm-dc-11.jpg"},{"username":"username0","imeListinga":"majica","cena":7,"opis":"v redu","url":"/images?name=men-s-travel-trekking-shirt-travel100-warm-bordeaux.jpg"}]},"username1":{"password":"b","name":"B","surname":"","date_of_birth":0,"phone_number":"","mail":"","coins_balance":1,"listing":[{"username":"username1","imeListinga":"gate","cena":2,"opis":"raztrgane","url":"/images?name=360_F_301217319_CyOQc22Km91LhZD4cyOGefC7eqCFD1QG.jpg"}]},"username2":{"password":"c","name":"C","surname":"","date_of_birth":0,"phone_number":"","mail":"","coins_balance":2,"listing":[{"imeListinga":"srajca","cena":7,"url":""}]},"username3":{"password":"d","name":"D","surname":"","date_of_birth":0,"phone_number":"","mail":"","coins_balance":3,"listing":[]},"username4":{"password":"e","name":"E","surname":"","date_of_birth":0,"phone_number":"","mail":"","coins_balance":4,"listing":[]},"undefined":{"password":"b","name":"Jan","surname":"","date_of_birth":"","phone_number":"+38651268632","mail":"jan@yahoo.si","geo":"Litija","coins_balance":10,"verification_code":2686,"public_code":7255}}
+{
+    "user0": {
+        "password": "password",
+        "phone_number": "0038641111111",
+        "geo": {
+            "lat": 46.05001520837923,
+            "long": 14.46908780664561
+        },
+        "coins_balance": 20,
+        "verification_code": 3537,
+        "public_code": 9082,
+        "verified": true
+    },
+    "user1": {
+        "password": "password",
+        "phone_number": "0038641111111",
+        "geo": {
+            "lat": 46.15001520837923,
+            "long": 14.36908780664561
+        },
+        "coins_balance": 20,
+        "verification_code": 3537,
+        "public_code": 9082,
+        "verified": true,
+        "listings": {
+            "05845ca0-681f-4099-9377-36c777bad48d": {
+                "id": "05845ca0-681f-4099-9377-36c777bad48d",
+                "owner": "user1",
+                "title": "Gucci torbica",
+                "price": 5,
+                "type": "accessory",
+                "size": "90cm",
+                "images": [
+                    "a52141c7-0758-4ad5-8508-ccb916472c9c.jpg"
+                ]
+            },
+            "abf6f248-cdaf-4714-bbb6-8a0f0e2c519c": {
+                "id": "abf6f248-cdaf-4714-bbb6-8a0f0e2c519c",
+                "owner": "user1",
+                "title": "Marija pomocnica",
+                "price": 5,
+                "type": "accessory",
+                "size": "velika",
+                "description": "lepo ohranjena",
+                "images": [
+                    "a3464e40-04b8-4d44-9001-2158e7cc2f3a.jpg",
+                    "a665d968-8edd-4de6-a1a3-72928089fbb6.jpg"
+                ]
+            },
+            "3f6fe5fc-6a8c-4d2a-894e-b3bf0bb1357c": {
+                "id": "3f6fe5fc-6a8c-4d2a-894e-b3bf0bb1357c",
+                "owner": "user1",
+                "title": "Hlace",
+                "price": 5,
+                "type": "pants",
+                "size": "M",
+                "images": [
+                    "e6197a2d-5f47-4a4b-a40f-c02c63ec577a.jpg",
+                    "c13c4c2d-e514-45b8-8aa0-6ec50dfface6.jpg",
+                    "03e50524-a1b6-4997-b630-6fc6e58b90c7.jpg",
+                    "56f9e90e-867c-4cdb-a72e-e930e284313e.jpg",
+                    "2da21493-321b-474a-b03c-a084c5d14161.jpg"
+                ]
+            },
+            "35d82753-bdbe-43d8-aafa-c89586dc1e36": {
+                "id": "35d82753-bdbe-43d8-aafa-c89586dc1e36",
+                "owner": "user1",
+                "title": "asd",
+                "price": 5,
+                "type": "sweater",
+                "size": "M",
+                "images": [
+                    "80a8da95-2892-41b2-beca-a7521c2eebef.jpg"
+                ]
+            },
+            "97dd7e9a-66a1-4f35-bd51-706f5cf2ff96": {
+                "id": "97dd7e9a-66a1-4f35-bd51-706f5cf2ff96",
+                "owner": "user1",
+                "title": "Pulovr",
+                "price": 5,
+                "type": "sweater",
+                "size": "M",
+                "images": [
+                    "ced6b9ea-6457-4b4f-9942-dbfbc89d0823.jpg"
+                ]
+            },
+            "1906187b-9dc3-4efe-8246-ee6027679982": {
+                "id": "1906187b-9dc3-4efe-8246-ee6027679982",
+                "owner": "user1",
+                "title": "aaaa",
+                "price": 5,
+                "type": "accessory",
+                "size": "asd",
+                "images": [
+                    "b70a8985-48ff-4df1-a16c-dd82eec08b02.jpg"
+                ]
+            },
+            "cf2dae54-ab3b-4d6a-a961-11b7aac36ab6": {
+                "id": "cf2dae54-ab3b-4d6a-a961-11b7aac36ab6",
+                "owner": "user1",
+                "title": "aaaa",
+                "price": 5,
+                "type": "accessory",
+                "size": "asd",
+                "images": [
+                    "b70a8985-48ff-4df1-a16c-dd82eec08b02.jpg"
+                ]
+            },
+            "90607472-2c92-4567-b1cd-84c81e5a08a1": {
+                "id": "90607472-2c92-4567-b1cd-84c81e5a08a1",
+                "owner": "user1",
+                "title": "aaaa",
+                "price": 5,
+                "type": "accessory",
+                "size": "asd",
+                "images": [
+                    "b70a8985-48ff-4df1-a16c-dd82eec08b02.jpg"
+                ]
+            },
+            "54db5dec-7bd5-45ac-a391-8892f953a483": {
+                "id": "54db5dec-7bd5-45ac-a391-8892f953a483",
+                "owner": "user1",
+                "title": "Hello",
+                "price": 7,
+                "type": "sweater",
+                "size": "M",
+                "images": [
+                    "cb461f3a-3a58-4832-b4d0-80f6c395d85f.jpg"
+                ]
+            },
+            "3c01e2a9-98d2-422d-9749-51284dd1cb47": {
+                "id": "3c01e2a9-98d2-422d-9749-51284dd1cb47",
+                "owner": "user1",
+                "title": "ads",
+                "price": 5,
+                "type": "shirt",
+                "size": "a",
+                "images": [
+                    "c9842dbb-baef-49b7-bda3-9fdca5aed0c0.jpg"
+                ]
+            },
+            "39325deb-b49b-4ebd-a3ce-84db74d2cfb7": {
+                "id": "39325deb-b49b-4ebd-a3ce-84db74d2cfb7",
+                "owner": "user1",
+                "title": "ads",
+                "price": 5,
+                "type": "shirt",
+                "size": "a",
+                "images": [
+                    "c9842dbb-baef-49b7-bda3-9fdca5aed0c0.jpg"
+                ]
+            },
+            "11c22f5b-49d3-4325-ab5e-5779f62480a6": {
+                "id": "11c22f5b-49d3-4325-ab5e-5779f62480a6",
+                "owner": "user1",
+                "title": "ada",
+                "price": 7,
+                "type": "shirt",
+                "size": "M",
+                "images": [
+                    "f6bf8b53-f2d5-4a7a-9f8f-31c2ddbc2226.jpg"
+                ]
+            }
+        }
+    },
+    "user2": {
+        "password": "password",
+        "phone_number": "0038641111111",
+        "geo": {
+            "lat": 46.55001520837923,
+            "long": 14.36908780664561
+        },
+        "coins_balance": 20,
+        "verification_code": 3537,
+        "public_code": 9082,
+        "verified": true
+    },
+    "user3": {
+        "password": "password",
+        "phone_number": "0038641111111",
+        "geo": {
+            "lat": 46.65001520837923,
+            "long": 14.16908780664561
+        },
+        "coins_balance": 20,
+        "verification_code": 3537,
+        "public_code": 9082,
+        "verified": true
+    },
+    "user4": {
+        "password": "password",
+        "phone_number": "0038641111111",
+        "geo": {
+            "lat": 46.45001520837923,
+            "long": 14.46908780664561
+        },
+        "coins_balance": 20,
+        "verification_code": 3537,
+        "public_code": 9082,
+        "verified": true
+    },
+    "user5": {
+        "password": "password",
+        "phone_number": "0038641111111",
+        "geo": {
+            "lat": 46.95001520837923,
+            "long": 14.06908780664561
+        },
+        "coins_balance": 20,
+        "verification_code": 3537,
+        "public_code": 9082,
+        "verified": true
+    },
+    "rihard12": {
+        "password": "rihard12",
+        "phone_number": "0038651475824",
+        "geo": {
+            "lat": 46.0498373,
+            "long": 14.4690655
+        },
+        "coins_balance": 3,
+        "verification_code": 3114,
+        "public_code": 7175,
+        "verified": true,
+        "listings": {
+            "666334db-aaf0-4496-bedd-f854d028384b": {
+                "id": "666334db-aaf0-4496-bedd-f854d028384b",
+                "owner": "rihard12",
+                "title": "majca",
+                "price": 5,
+                "type": "shirt",
+                "gender": "male",
+                "size": "l",
+                "description": "wefgrthzjkhljk"
+            },
+            "7ef530a9-a3ff-432b-8e5d-de2592279631": {
+                "id": "7ef530a9-a3ff-432b-8e5d-de2592279631",
+                "owner": "rihard12",
+                "title": "pulover",
+                "price": 5,
+                "type": "sweater",
+                "gender": "male",
+                "size": "L",
+                "description": "wdertzui"
+            }
+        }
+    }
+}

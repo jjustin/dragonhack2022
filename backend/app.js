@@ -62,7 +62,6 @@ app.post('/register', function (req, res) {
             "verification_code": verification_code,
             "public_code": public_code,
         }
-        
         // send sms with verification_code
         const accountSid = "<Removed>";
         const authToken = "<Removed>";
@@ -183,9 +182,6 @@ app.get('/images', function (req, res) {
 });
 
 
-// listingPicture
-// poda mi username in index,
-    
 
 
 
@@ -214,7 +210,7 @@ app.post('/upload', function (req, res) {
         return res.status(400).send('No files were uploaded.');
     }
 
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
     const imagename = randomUUID() + ".jpg";
     let sampleFile = req.files.file;
     const path = require('path');
@@ -222,9 +218,9 @@ app.post('/upload', function (req, res) {
 
     let link = path.join(prelink, imagename);
 
-  //console.log(link)
-  //console.log(sampleFile);
-  // Use the mv() method to place the file somewhere on your server
+    //console.log(link)
+    //console.log(sampleFile);
+    // Use the mv() method to place the file somewhere on your server
     sampleFile.mv(link, function (err) {
         if (err)
             return res.status(500).send(err);
@@ -261,7 +257,7 @@ app.post('/seller', function (req, res) {  // body: seller username, buyer usern
                 if (users[req.body.buyer].coins_balance >= price) {
                     users[req.body.buyer].coins_balance -= price
                     users[req.body.seller].coins_balance += price
-                    users[req.body.seller].listing.splice(comfirmations[i].index,1)
+                    users[req.body.seller].listing.splice(comfirmations[i].index, 1)
                     fs.writeFileSync('users.json', JSON.stringify(users));
                     comfirmations.splice(i, 1)
                 } else {
@@ -295,7 +291,7 @@ app.post('/buyer', function (req, res) {
                 if (users[req.body.buyer].coins_balance >= price) {
                     users[req.body.buyer].coins_balance -= price
                     users[req.body.seller].coins_balance += price
-                    users[req.body.seller].listing.splice(comfirmations[i].index,1)
+                    users[req.body.seller].listing.splice(comfirmations[i].index, 1)
                     fs.writeFileSync('users.json', JSON.stringify(users));
                     comfirmations.splice(i, 1)
                 } else {
