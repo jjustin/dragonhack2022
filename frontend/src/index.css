@@ -17,6 +17,8 @@ h3,
 h4,
 label,
 p,
+div,
+span,
 .ant-form-item-label>label,
 .ant-checkbox+span {
   color: rgb(255, 255, 255);
@@ -26,6 +28,10 @@ code {
     monospace;
 }
 
+.ant-select-item-option-content,
+.ant-select-selection-item {
+  color: black
+}
 #app-content {
   padding-left: 30px;
   padding-right: 30px;
