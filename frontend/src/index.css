@@ -23,6 +23,15 @@ span,
 .ant-checkbox+span {
   color: rgb(255, 255, 255);
 }
+.ant-radio-button-wrapper>span,
+.ant-select-arrow,
+.ant-input-number-input {
+  color: black;
+}
+
+.ant-radio-button-checked {
+  background-color: gray !important
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

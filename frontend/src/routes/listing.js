@@ -21,7 +21,7 @@ export default function Listing() {
                         marginTop: "20px", fontWeight: "bold", fontSize: "25px",
                         marginLeft: "7px"
                     }} >
-                        Price: 5 thrift coins
+                        Price: 5 trift coins
                     </Col>
                     <Col sm={5} style={{ marginTop: "20px" }}>
                         Toj ubistvu ful kul majca, nosena v barci tko leta letos, 2022 pa to,

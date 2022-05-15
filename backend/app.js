@@ -2,7 +2,8 @@
 var express = require('express');
 
 var app = express();
-var cors = require('cors')
+var cors = require('cors');
+const { randomUUID } = require('crypto');
 
 app.use(cors())
 app.use(express.json());
@@ -113,8 +114,8 @@ app.get('/listings', function (req, res) {
     const allListings = [];
     
     for (let i in users) {
-        for(let j in users[i].listing) {
-            allListings.push(users[i].listing[j])
+        for (let j in users[i].listings) {
+            allListings.push(users[i].listings[j])
         }
     }
     
@@ -123,20 +124,39 @@ app.get('/listings', function (req, res) {
 
 // newlisting
 app.post('/newlisting', function (req, res) {
+    const token = req.headers.authorization
+    if (!token) {
+        res.statusCode = 401
+        res.send({ error: "401" })
+        return
+    }
+
     const fs = require("fs")
     const users_file = fs.readFileSync("users.json")
     const users = JSON.parse(users_file)
     
-    for (let i = 0;users[req.body.username].listing.length; i++) {
-        if (users[req.body.username].listing[i].imeListinga == req.body.imeListinga) {
-            res.sendStatus = 404
-            res.send({error: "404"})
-            return
-        }
+    const id = randomUUID()
+
+    let listing = {
+        "id": id,
+        "owner": token,
+        "title": req.body.title,
+        "price": req.body.price,
+        "type": req.body.type,
+        "gender": req.body.gender,
+        "size": req.body.size,
+        "description": req.body.description,
+        "images": req.body.images
     }
-    users[req.body.username].listing.push({"username": req.body.username, "imeListinga": req.body.imeListinga, "cena" : req.body.cena, "opis": req.body.opis, "url": req.body.url})
+
+    if (!("listings" in users[token])) {
+        users[token].listings = {}
+    }
+
+    users[token].listings[id] = listing
+
     fs.writeFileSync('users.json', JSON.stringify(users));
-    res.send({"status": "ok"})
+    res.send(listing)
 });
 
 app.get('/images', function (req, res) {

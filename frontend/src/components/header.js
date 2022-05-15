@@ -38,7 +38,7 @@ function H({ onChange }) {
             <Link to="/account" className="link"> {name} </Link>( {balance} coins )
             <a className="link" onClick={() => {
                 localStorage.clear("token");
-                setLoggedIn(getLoginStatus());
+                window.location.pathname = "/";
             }} style={{ fontSize: 20, paddingLeft: 30 }}><LogoutOutlined /></a>
         </div>
     }
