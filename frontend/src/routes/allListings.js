@@ -22,12 +22,13 @@ export default function AllListings() {
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-evenly" }}>
             {
                 listings.map(listing => (
-                    <Link to={"/listings/" + listing.id} key={listing.id}>
+                    <Link to={"/listings/" + listing.id + "?owner=" + listing.owner} key={listing.id}>
                         <ListingShort
-                            name={listing.imeListinga}
-                            img={"http://localhost:5000/images?name=" + listing.url}
-                            cost={listing.cena}
+                            name={listing.title}
+                            img={listing?.images?.length ? listing.images[0] : undefined}
+                            cost={listing.price}
                             id={listing.id}
+                            type={listing.type}
                             style={{ margin: "10px" }}
                         ></ListingShort>
                     </Link>

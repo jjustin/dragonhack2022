@@ -35,7 +35,7 @@ function H({ onChange }) {
                 <PlusSquareOutlined /> Add new listing
             </Link>
             Logged in as
-            <Link to="/account" className="link"> {name} </Link>( {balance} coins )
+            <Link to="/account" className="link"> {name} </Link>( {balance} swapcoins )
             <a className="link" onClick={() => {
                 localStorage.clear("token");
                 window.location.pathname = "/";

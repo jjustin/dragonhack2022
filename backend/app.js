@@ -58,7 +58,7 @@ app.post('/register', function (req, res) {
             "phone_number": req.body.phone_number,
             "mail": req.body.mail,
             "geo": req.body.geo,
-            "coins_balance": req.body.coins_balance,
+            "coins_balance": 20,
             "verification_code": verification_code,
             "public_code": public_code,
         }
@@ -111,6 +111,7 @@ app.post('/verification', function (req, res) {
 
 // user
 app.get('/user', function (req, res) {
+    console.log(req.query.username)
     const fs = require("fs")
     const users_file = fs.readFileSync("users.json")
     const users = JSON.parse(users_file)
@@ -185,6 +186,53 @@ app.get('/images', function (req, res) {
 // listingPicture
 // poda mi username in index,
     
+
+
+
+
+//ustvarjanje listinga
+// user ne sme imeti dveh listingov z enakim listingIme-nom!!!!!!!!!!!!!!!!
+// Samo tako lahko vem, kateremu listingu pripada slika.
+
+
+
+
+
+
+
+
+// dodajanje slike, in obenem posodobitev listinga.
+//v query-ju je podan imagename (tu z malimi crkami), username, in listingname
+// za files je podan key pod imenom imagefile
+
+const fileUpload = require('express-fileupload');
+// default options
+app.use(fileUpload());
+
+app.post('/upload', function (req, res) {
+    if (!req.files || Object.keys(req.files).length === 0) {
+        return res.status(400).send('No files were uploaded.');
+    }
+
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    const imagename = randomUUID() + ".jpg";
+    let sampleFile = req.files.file;
+    const path = require('path');
+    let prelink = path.resolve('images'); // '/Users/joe/joe.txt' if run from my home folder
+
+    let link = path.join(prelink, imagename);
+
+  //console.log(link)
+  //console.log(sampleFile);
+  // Use the mv() method to place the file somewhere on your server
+    sampleFile.mv(link, function (err) {
+        if (err)
+            return res.status(500).send(err);
+
+        res.send({ "image": imagename });
+    });
+});
+
 
 // // request
 // app.get('/request', function (req, res) { 
@@ -262,6 +310,59 @@ app.post('/buyer', function (req, res) {
     fs.writeFileSync('comfirmations.json', JSON.stringify(comfirmations));
     res.send({ "status": "ok" })
 });
+
+app.post('/requestBuy', function (req, res) {
+    const token = req.headers.authorization
+    if (!token) {
+        res.statusCode = 401
+        res.send({ error: "401" })
+        return
+    }
+
+    let id = req.body.listingID
+    let owner = req.body.owner
+
+    const fs = require("fs")
+    const users_file = fs.readFileSync("users.json")
+    const users = JSON.parse(users_file)
+
+    if (!("requested" in users[owner].listings[id])) {
+        users[owner].listings[id].requested = []
+    }
+
+    users[owner].listings[id].requested.push(token)
+
+    fs.writeFileSync('users.json', JSON.stringify(users));
+    res.send({ "status": "ok" })
+})
+
+app.post("/sell", function (req, res) {
+    const token = req.headers.authorization
+    if (!token) {
+        res.statusCode = 401
+        res.send({ error: "401" })
+        return
+    }
+
+    let buyer = req.body.buyer
+    let listingID = req.body.listingID
+    let seller = token
+
+    const fs = require("fs")
+    const users_file = fs.readFileSync("users.json")
+    const users = JSON.parse(users_file)
+
+    let listing = users[seller].listings[listingID]
+    users[seller].coins_balance += listing.price
+    users[buyer].coins_balance -= listing.price
+
+    delete users[seller].listings[listingID]
+
+    fs.writeFileSync('users.json', JSON.stringify(users));
+    console.log({ "balance": users[seller].coins_balance })
+    res.send({ "balance": users[seller].coins_balance })
+})
+
 
 var server = app.listen(5000, function () {
     console.log('Node server is running..');
