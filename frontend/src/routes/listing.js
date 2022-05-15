@@ -57,7 +57,7 @@ export default function Listing() {
             return
         }
 
-        postApi("/sell", { listingID: id, buyer: buyer }).then(res => res.json).then(res => {
+        postApi("/sell", { listingID: id, buyer: buyer }).then(res => res.json()).then(res => {
             localStorage.setItem("balance", res.balance);
             console.log(res)
             alert("Transaction successful")
@@ -126,7 +126,7 @@ export default function Listing() {
                                             marginTop: "40px", paddingBottom: "7px", paddingTop: "7px", paddingLeft: "15px",
                                             paddingRight: "15px", borderRadius: "12px"
                                         }} onClick={() => sell(requestingUser)} key="requestingUser" > Sell to {requestingUser}
-                                        </button>) : <div style={{ paddingTop: "40px", fontSize: "20px" }}>No requestes to buy</div>)
+                                        </button>) : <div style={{ paddingTop: "40px", fontSize: "20px" }}>No requests to buy</div>)
                                 : localStorage.getItem("balance") > listing.price && !(listing.requested && listing.requested.includes(localStorage.getItem("token"))) ?
                                     <button id='knof' className="home-button link" style={{
                                         backgroundColor: "rgb(0, 21, 41)", border: "none", fontSize: "30px",
@@ -138,7 +138,7 @@ export default function Listing() {
                                         backgroundColor: "rgb(0, 21, 41)", border: "none", fontSize: "30px",
                                         marginTop: "40px", paddingBottom: "7px", paddingTop: "7px", paddingLeft: "15px",
                                         paddingRight: "15px", borderRadius: "12px", pointerEvents: "none"
-                                    }} > {listing.requested && listing.requested.includes(localStorage.getItem("token")) ? "Already requested to buy" : "Balance to low"}
+                                    }} > {listing.requested && listing.requested.includes(localStorage.getItem("token")) ? "Already requested to buy" : localStorage.getItem("token") ? "Balance to low" : "You must be logged in to buy"}
                                     </button>
 
                         }

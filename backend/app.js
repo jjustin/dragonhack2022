@@ -359,6 +359,21 @@ app.post("/sell", function (req, res) {
     res.send({ "balance": users[seller].coins_balance })
 })
 
+app.get("/balance", function (req, res) {
+    const token = req.headers.authorization
+    if (!token) {
+        res.statusCode = 401
+        res.send({ error: "401" })
+        return
+    }
+
+    const fs = require("fs")
+    const users_file = fs.readFileSync("users.json")
+    const users = JSON.parse(users_file)
+
+    res.send({ "balance": users[token].coins_balance })
+})
+
 
 var server = app.listen(5000, function () {
     console.log('Node server is running..');

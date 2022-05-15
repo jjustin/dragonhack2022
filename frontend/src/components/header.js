@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { Header } from "antd/lib/layout/layout";
 import { useState, useEffect } from 'react';
 import { PlusSquareOutlined, LogoutOutlined } from '@ant-design/icons';
+import { getApi } from '../utils/api';
 
 let getLoginStatus = () => {
     if (window.location.pathname.startsWith("/login") ||
@@ -19,6 +20,10 @@ function H({ onChange }) {
     const location = useLocation();
 
     useEffect(() => {
+        getApi("/balance").then(res => res.json()).then(res => {
+            localStorage.setItem("balance", res.balance);
+        })
+
         setLoggedIn(getLoginStatus());
     }, [location]);
 
