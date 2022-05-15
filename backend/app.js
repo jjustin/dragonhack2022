@@ -25,7 +25,6 @@ app.use(express.urlencoded({ extended: true }))
 
 // log in
 app.post('/login', function (req, res) {
-    console.log(req.body)
     const fs = require("fs")
     const users_file = fs.readFileSync("users.json")
     var users = JSON.parse(users_file)
@@ -53,6 +52,8 @@ app.post('/signup', function (req, res) {
         "phone_number": req.body.phone_number, "location":"","mail": req.body.mail, "coins_balance": req.body.coins_balance, "listing": []})
         
         fs.writeFileSync('users.json', JSON.stringify(users));
+        console.log(users)
+
         const verifications_file = fs.readFileSync("verifications.json")
         var verifications = JSON.parse(verifications_file)
         verifications = new Map(Object.entries(verifications))
@@ -90,6 +91,13 @@ app.post('/verification', function (req, res) {
 
 // poslje array z objekti zgoraj opisane oblike
 
+// user
+app.post('/user', function (req, res) { 
+    const fs = require("fs")
+    const users_file = fs.readFileSync("users.json")
+    const users = JSON.parse(users_file)
+    res.send(users[req.body.username])
+});
 
 // listing
 app.get('/listing', function (req, res) {
@@ -105,6 +113,24 @@ app.get('/listing', function (req, res) {
     }
     
     res.send(allListings)
+});
+
+// newlisting
+app.post('/newlisting', function (req, res) {
+    const fs = require("fs")
+    const users_file = fs.readFileSync("users.json")
+    const users = JSON.parse(users_file)
+    
+    for (let i = 0;users[req.body.username].listing.length; i++) {
+        if (users[req.body.username].listing[i].imeListinga == req.body.imeListinga) {
+            res.sendStatus = 404
+            res.send({error: "404"})
+            return
+        }
+    }
+    users[req.body.username].listing.push({"username": req.body.username, "imeListinga": req.body.imeListinga, "cena" : req.body.cena, "opis": req.body.opis, "url": req.body.url})
+    fs.writeFileSync('users.json', JSON.stringify(users));
+    res.send({"status": "ok"})
 });
 
 app.get('/images', function (req, res) {
@@ -133,7 +159,7 @@ app.get('/images', function (req, res) {
 
 
 // seller comfirmation
-app.get('/seller', function (req, res) {  // body: seller username, buyer username, item index
+app.post('/seller', function (req, res) {  // body: seller username, buyer username, item index
     const fs = require("fs")
 
     const comfirmations_file = fs.readFileSync("comfirmations.json")
@@ -167,7 +193,7 @@ app.get('/seller', function (req, res) {  // body: seller username, buyer userna
 });
 
 // buyer comfirmation
-app.get('/buyer', function (req, res) { 
+app.post('/buyer', function (req, res) { 
     const fs = require("fs")
 
     const comfirmations_file = fs.readFileSync("comfirmations.json")
