@@ -21,10 +21,6 @@ app.use(express.urlencoded({ extended: true }))
 //     },
 // }
 
-// verifications = {
-//     "username":{ verification_code: 5555} 
-// }
-
 // log in
 app.post('/login', function (req, res) {
     const fs = require("fs")
@@ -66,6 +62,21 @@ app.post('/register', function (req, res) {
             "verification_code": verification_code,
             "public_code": public_code,
         }
+        
+        // send sms with verification_code
+        const accountSid = "<Removed>";
+        const authToken = "<Removed>";
+        const client = require('twilio')(accountSid, authToken);
+
+        client.messages
+        .create({
+            body: 'This is your verification code for Triftify: ' + verification_code,
+            from: '+19705917319',
+            // to: req.body.phone_number
+            to: '+<phonenumber>' // fixed number for tests
+        })
+        .then();
+        
 
         fs.writeFileSync('users.json', JSON.stringify(users));
         res.statusCode = 201
@@ -171,81 +182,9 @@ app.get('/images', function (req, res) {
 });
 
 
-
-
-
-
-//ustvarjanje listinga
-// user ne sme imeti dveh listingov z enakim listingIme-nom!!!!!!!!!!!!!!!!
-// Samo tako lahko vem, kateremu listingu pripada slika.
-
-
-
-
-
-
-
-
-// dodajanje slike, in obenem posodobitev listinga.
-//v query-ju je podan imagename (tu z malimi crkami), username, in listingname
-// za files je podan key pod imenom imagefile
-
-const fileUpload = require('express-fileupload');
-// default options
-app.use(fileUpload());
-
-app.post('/upload', function (req, res) {
-    if (!req.files || Object.keys(req.files).length === 0) {
-        return res.status(400).send('No files were uploaded.');
-    }
-
-    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-    const imagename = req.query.imagename;
-    let sampleFile = req.files.imagefile;
-    const username = req.query.username;
-    const listingname = req.query.listingname;
-    const path = require('path');
-    let prelink = path.resolve('images'); // '/Users/joe/joe.txt' if run from my home folder
-
-    let link = path.join(prelink, imagename);
-
-    //console.log(link)
-    //console.log(sampleFile);
-    // Use the mv() method to place the file somewhere on your server
-    sampleFile.mv(link, function (err) {
-
-        const fs = require("fs")
-        const users_file = fs.readFileSync("users.json")
-        const users = JSON.parse(users_file)
-
-        let temp = 0;
-        for (let i in users[username].listing) {
-            if (users[username].listing[i].imeListinga == listingname) {
-
-                users[username].listing[i].imageName = imagename;
-
-                fs.writeFileSync('users.json', JSON.stringify(users))
-                temp = 1;
-                break;
-            }
-        }
-        if (temp == 0) {
-            return res.status(500).send("Ni listinga.");
-
-        }
-
-        if (err)
-            return res.status(500).send(err);
-
-        res.send('File uploaded!');
-    });
-});
-
-
-
-
-
-
+// listingPicture
+// poda mi username in index,
+    
 
 // // request
 // app.get('/request', function (req, res) { 
@@ -274,6 +213,7 @@ app.post('/seller', function (req, res) {  // body: seller username, buyer usern
                 if (users[req.body.buyer].coins_balance >= price) {
                     users[req.body.buyer].coins_balance -= price
                     users[req.body.seller].coins_balance += price
+                    users[req.body.seller].listing.splice(comfirmations[i].index,1)
                     fs.writeFileSync('users.json', JSON.stringify(users));
                     comfirmations.splice(i, 1)
                 } else {
@@ -307,6 +247,7 @@ app.post('/buyer', function (req, res) {
                 if (users[req.body.buyer].coins_balance >= price) {
                     users[req.body.buyer].coins_balance -= price
                     users[req.body.seller].coins_balance += price
+                    users[req.body.seller].listing.splice(comfirmations[i].index,1)
                     fs.writeFileSync('users.json', JSON.stringify(users));
                     comfirmations.splice(i, 1)
                 } else {
