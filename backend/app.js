@@ -105,7 +105,7 @@ app.post('/user', function (req, res) {
 });
 
 // listing
-app.get('/listing', function (req, res) {
+app.get('/listings', function (req, res) {
     const fs = require("fs")
     const users_file = fs.readFileSync("users.json")
     const users = JSON.parse(users_file)
