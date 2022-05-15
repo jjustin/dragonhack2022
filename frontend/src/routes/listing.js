@@ -10,23 +10,20 @@ export default function Listing() {
     return (
         <main style={{ padding: "1rem 0", marginLeft: "100px", }}>
             <h2 style={{ marginBottom: "30px", fontSize: "35px" }} >Listing {id}</h2>
-            <Row style={{ marginLeft: "100px" }} >
+            <Row style={{ marginLeft: "25px" }} >
                 <img src={img1} alt="" style={{ padding: "30px" }} ></img>
                 <img src={img2} alt="" style={{ padding: "30px" }} ></img>
                 <img src={img3} alt="" style={{ padding: "30px" }} ></img>
             </Row>
-            <div class="wrapper">
-                {/* <div class="column" style={{ marginTop: "20px", fontWeight: "bold" }}>
-                    Price: 5 thrift coins
-                </div>
-                <div class="column" style={{ marginTop: "20px", fontWeight: "bold" }}>
-                    Price: 5 thrift coins
-                </div> */}
+            <div>
                 <Row >
-                    <Col sm={2} style={{ marginTop: "20px", fontWeight: "bold" }} >
+                    <Col sm={2.85} style={{
+                        marginTop: "20px", fontWeight: "bold", fontSize: "25px",
+                        marginLeft: "7px"
+                    }} >
                         Price: 5 thrift coins
                     </Col>
-                    <Col sm={6} style={{ marginTop: "20px" }}>
+                    <Col sm={5} style={{ marginTop: "20px" }}>
                         Toj ubistvu ful kul majca, nosena v barci tko leta letos, 2022 pa to,
                         ceprov so bli dost shit je majca se zmer kr kul pa to ane
                         Stara je dobr let, nosena skor nc, bl zbirateljsk value,
@@ -34,15 +31,15 @@ export default function Listing() {
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
-                        <button id='knof' onclick="" style={{
-                            color: "cyan", backgroundColor: "transparent", border: "", fontSize: "25px",
-                            fontWeight: "bold"
+                    <Col sm={2.5}>
+                        <button id='knof' className="home-button link" style={{
+                            backgroundColor: "transparent", border: "none", fontSize: "30px",
+                            marginTop: "40px"
                         }} >
                             I'm interested!
                         </button>
                     </Col>
-                    <Col>
+                    <Col sm={5} style={{ marginTop: "46px", fontSize: "25px", marginLeft: "50px" }}>
                         Contact: Janez Justin,
                         051 373 268
                     </Col>

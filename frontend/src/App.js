@@ -11,6 +11,7 @@ import Login from "./routes/login";
 import Register from "./routes/register";
 import Header from './components/header';
 import { Content } from "antd/lib/layout/layout";
+import List from "./routes/list";
 
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/" element={<AllListings />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/list" element={<List />} />
         </Routes>
       </Content>
     </div>
