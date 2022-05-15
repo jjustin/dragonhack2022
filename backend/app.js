@@ -29,8 +29,10 @@ app.post('/login', function (req, res) {
     const users_file = fs.readFileSync("users.json")
     var users = JSON.parse(users_file)
 
-    if (users[req.body.username] && req.body.password == users[req.body.username].password) {
-        res.send({token: req.body.username})
+    if (users[req.body.username]
+        && req.body.password == users[req.body.username].password
+        && users[req.body.username].verified) {
+        res.send({ token: req.body.username, balance: users[req.body.username].coins_balance })
     } else {
         res.statusCode = 404
         res.send({error: "404"})
@@ -38,7 +40,7 @@ app.post('/login', function (req, res) {
 });
 
 // sign up
-app.post('/signup', function (req, res) {
+app.post('/register', function (req, res) {
     const fs = require("fs")
     const users_file = fs.readFileSync("users.json")
     var users = JSON.parse(users_file)
@@ -47,37 +49,40 @@ app.post('/signup', function (req, res) {
         res.statusCode = 409
         res.send({error: "409"})
     } else {
-        users = new Map(Object.entries(users))
-        users.set(req.body.username, {"password": req.body.password, "name": req.body.name, "surname": req.body.surname, "date_of_birth": req.body.date_of_birth,
-        "phone_number": req.body.phone_number, "location":"","mail": req.body.mail, "coins_balance": req.body.coins_balance, "listing": []})
+        var verification_code = Math.floor(Math.random() * (10000 - 1000) + 1000)
+        var public_code = Math.floor(Math.random() * (10000 - 1000) + 1000)
+
+        users[req.body.username] = {
+            "password": req.body.password,
+            "name": req.body.name,
+            "surname": req.body.surname,
+            "date_of_birth": req.body.date_of_birth,
+            "phone_number": req.body.phone_number,
+            "mail": req.body.mail,
+            "geo": req.body.geo,
+            "coins_balance": req.body.coins_balance,
+            "verification_code": verification_code,
+            "public_code": public_code,
+        }
         
         fs.writeFileSync('users.json', JSON.stringify(users));
-        console.log(users)
-
-        const verifications_file = fs.readFileSync("verifications.json")
-        var verifications = JSON.parse(verifications_file)
-        verifications = new Map(Object.entries(verifications))
-
-        var verification_code = Math.floor(Math.random() * (10000 - 1000) + 1000)        
-        verifications.set(req.body.username, verification_code)
-        //!!!!!! sent code on sms
-        fs.writeFileSync('verifications.json', JSON.stringify(verifications));
-        res.send({"status": "verification sent"})
+        res.statusCode = 201
+        res.send({ "status": "verification sent", "code": public_code, "username": req.body.username })
     }
 });
 
 // user verification
 app.post('/verification', function (req, res) {
     const fs = require("fs")
-    const verifications_file = fs.readFileSync("verifications.json")
-    var verifications = JSON.parse(verifications_file)
-    if (verifications[req.body.username] == req.body.verification_code) {
+    const users_file = fs.readFileSync("users.json")
+    var users = JSON.parse(users_file)
+    if (users[req.body.username].verification_code == req.body.verification_code
+        && users[req.body.username].public_code == req.body.code) {
+        users[req.body.username].verified = true
+        fs.writeFileSync('users.json', JSON.stringify(users));
+
         res.statusCode = 207
-        let usr = req.body.username
-        verifications = new Map(Object.entries(verifications))
-        verifications.delete(usr)
-        fs.writeFileSync('verifications.json', JSON.stringify(verifications));
-        res.send({"status": "ok"})
+        res.send({ token: req.body.username, balance: users[req.body.username].coins_balance })
     } else {
         res.statusCode = 404
         res.send({error: "404"})
