@@ -73,7 +73,13 @@
         "phone_number": "",
         "mail": "",
         "coins_balance": 2,
-        "listing": []
+        "listing": [
+            {
+                "imeListinga": "srajca",
+                "cena": 7,
+                "url": ""
+            }
+        ]
     },
     "username3": {
         "password": "d",

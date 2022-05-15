@@ -1,5 +1,6 @@
 
 var express = require('express');
+
 var app = express();
 var cors = require('cors')
 
@@ -91,7 +92,7 @@ app.post('/verification', function (req, res) {
 
 
 //user ima array objectov po imenu listing
-// object listing ima propertije username user-ja, index, ime listinga, ceno, url -  ce klikne nanj v drugem gettu dobi se sliko
+// object listing ima propertije username user-ja, imeListinga, ceno, imageName -  ce klikne nanj v drugem gettu dobi se sliko
 // nadgradnja: pošljem mu jih recimo le prvih 30
 
 // poslje array z objekti zgoraj opisane oblike
@@ -141,7 +142,7 @@ app.post('/newlisting', function (req, res) {
 app.get('/images', function (req, res) {
     
     const name = req.query.name
-    console.log(name)
+    //console.log(name)
     const path = require('path');
     let link = path.resolve('images', name);
     //console.log(link);
@@ -150,8 +151,80 @@ app.get('/images', function (req, res) {
 });
 
 
-//listingPicture
-// poda mi username in index,
+
+
+
+
+//ustvarjanje listinga
+// user ne sme imeti dveh listingov z enakim listingIme-nom!!!!!!!!!!!!!!!!
+// Samo tako lahko vem, kateremu listingu pripada slika.
+
+
+
+
+
+
+
+
+// dodajanje slike, in obenem posodobitev listinga.
+//v query-ju je podan imagename (tu z malimi crkami), username, in listingname
+// za files je podan key pod imenom imagefile
+
+const fileUpload = require('express-fileupload');
+// default options
+app.use(fileUpload());
+
+app.post('/upload', function(req, res) {
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send('No files were uploaded.');
+  }
+
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  const imagename = req.query.imagename;
+  let sampleFile = req.files.imagefile;
+  const username = req.query.username;
+  const listingname = req.query.listingname;
+  const path = require('path');
+  let prelink = path.resolve('images'); // '/Users/joe/joe.txt' if run from my home folder
+
+  let link = path.join(prelink, imagename);
+
+  //console.log(link)
+  //console.log(sampleFile);
+  // Use the mv() method to place the file somewhere on your server
+  sampleFile.mv(link, function(err) {
+
+    const fs = require("fs")
+    const users_file = fs.readFileSync("users.json")
+    const users = JSON.parse(users_file)
+
+    let temp = 0;
+    for (let i in users[username].listing) {
+        if (users[username].listing[i].imeListinga == listingname) {
+            
+            users[username].listing[i].imageName = imagename;
+            
+            fs.writeFileSync('users.json', JSON.stringify(users))
+            temp = 1;
+            break;
+        }
+    }
+    if(temp == 0) {
+        return res.status(500).send("Ni listinga.");
+
+    }
+
+    if (err)
+      return res.status(500).send(err);
+
+    res.send('File uploaded!');
+  });
+});
+
+
+
+
+
     
 
 // // request
