@@ -1,14 +1,28 @@
 {
     "username0": {
-        "password": "a",
+        "password": "password",
         "name": "A",
         "surname": "",
         "date_of_birth": 0,
         "phone_number": "",
         "mail": "",
         "coins_balance": 0,
-        "listing": [{"username" : "username0", "imeListinga" : "hlace", "cena" : 15, "opis" : "dobre", "url" : "/images?name=sp-pgm-dc-11.jpg"}, {"username" : "username0", "imeListinga" : "majica", "cena" : 7, "opis" : "v redu", "url" : "/images?name=men-s-travel-trekking-shirt-travel100-warm-bordeaux.jpg"}]
-        
+        "listing": [
+            {
+                "username": "username0",
+                "imeListinga": "hlace",
+                "cena": 15,
+                "opis": "dobre",
+                "url": "/images?name=sp-pgm-dc-11.jpg"
+            },
+            {
+                "username": "username0",
+                "imeListinga": "majica",
+                "cena": 7,
+                "opis": "v redu",
+                "url": "/images/men-s-travel-trekking-shirt-travel100-warm-bordeaux.jpg"
+            }
+        ]
     },
     "username1": {
         "password": "b",
@@ -18,8 +32,16 @@
         "phone_number": "",
         "mail": "",
         "coins_balance": 1,
-        "listing": [{"username" : "username1", "imeListinga" : "gate", "cena" : 2, "opis" : "raztrgane", "url" : "/images?name=360_F_301217319_CyOQc22Km91LhZD4cyOGefC7eqCFD1QG.jpg"}]
-
+        "listing": [
+            {
+                "username": "username1",
+                "imeListinga": "gate",
+                "cena": 2,
+                "opis": "raztrgane",
+                "url": "/images/360_F_301217319_CyOQc22Km91LhZD4cyOGefC7eqCFD1QG.jpg",
+                "imageName": "360_F_301217319_CyOQc22Km91LhZD4cyOGefC7eqCFD1QG.jpg"
+            }
+        ]
     },
     "username2": {
         "password": "c",
@@ -29,7 +51,13 @@
         "phone_number": "",
         "mail": "",
         "coins_balance": 2,
-        "listing" : []
+        "listing": [
+            {
+                "imeListinga": "srajca",
+                "cena": 7,
+                "url": ""
+            }
+        ]
     },
     "username3": {
         "password": "d",
@@ -39,7 +67,7 @@
         "phone_number": "",
         "mail": "",
         "coins_balance": 3,
-        "listing" : []
+        "listing": []
     },
     "username4": {
         "password": "e",
@@ -49,6 +77,6 @@
         "phone_number": "",
         "mail": "",
         "coins_balance": 4,
-        "listing" : []
+        "listing": []
     }
 }
