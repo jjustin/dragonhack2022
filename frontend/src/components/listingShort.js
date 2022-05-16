@@ -3,7 +3,7 @@ let types = {
     "sweater": "Sweater",
     "cardigan": "Cardigan",
     "pants": "Pants",
-    "pants": "Shoes",
+    "shoes": "Shoes",
     "accessory": "Accessory",
 }
 
